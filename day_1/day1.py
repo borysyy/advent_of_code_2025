@@ -1,5 +1,7 @@
-from utils import read_input
-
+def read_input(input_file):
+    with open(input_file, 'r') as file:
+        return [line.strip() for line in file.readlines()]
+    
 def new_position(position, direction, rotation):
     zero = 0
     
