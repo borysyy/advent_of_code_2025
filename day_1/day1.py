@@ -1,28 +1,29 @@
-
-def read_input(input_file):
-    with open(input_file, 'r') as file:
-        return [line.strip() for line in file.readlines()]
+from utils import read_input
 
 def new_position(position, direction, rotation):
     zero = 0
     
     if direction == "L":
-        position = position - rotation
+        if position == 0:
+            position = 100
 
+        position = position - rotation
         while position <= -1:
             position = position + 100
-    
+            zero += 1
+   
     else:
         position = position + rotation
-        
-        while position >= 100:
+        while position > 100:
             position = position - 100
-
-    print(position)
+            zero += 1
+            
+    if position == 100:
+        position = 0
     
     if position == 0:
         zero += 1
-    
+        
     return position, zero
 
 def main():
@@ -32,7 +33,7 @@ def main():
     
     position = 50
     
-    for i, line in enumerate(lines):
+    for line in lines:
         direction = line[0]
         rotation = line[1:]
         
